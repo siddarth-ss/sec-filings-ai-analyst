@@ -20,7 +20,8 @@ def fetch(url: str, retries: int = 3) -> requests.Response:
         if resp.status_code == 200:
             return resp
         print(f"Attempt {attempt} failed (HTTP {resp.status_code}), retrying...")
-        time.sleep(2 ** attempt)
+        if attempt!= retries:
+            time.sleep(2 ** attempt)
     resp.raise_for_status()
     return resp
 
